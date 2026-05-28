@@ -1172,7 +1172,97 @@ loadSavedLogo();
 
 </script>
 ```
+```html
+<script type="module">
+
+import { createClient }
+from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const SUPABASE_URL =
+'https://orrmwdjebfawekocbjrx.supabase.co'
+
+const SUPABASE_KEY =
+'sb_publishable_foc4DXyMgwjQ1JMM3kzrQA_ybbbia7X'
+
+const supabase =
+createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+)
+
+/* رفع الشعار */
+
+logoInput.addEventListener('change', async (e)=>{
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const fileName =
+`logo-${Date.now()}-${file.name}`;
+
+const { error } =
+await supabase.storage
+.from('school-files')
+.upload(fileName,file);
+
+if(error){
+
+alert('فشل رفع الشعار');
+return;
+
+}
+
+const { data } =
+supabase.storage
+.from('school-files')
+.getPublicUrl(fileName);
+
+const imageUrl =
+data.publicUrl;
+
+localStorage.setItem(
+'platformLogo',
+imageUrl
+);
+
+sidebarLogo.innerHTML =
+`<img src="${imageUrl}" class="w-full h-full object-cover">`;
+
+mainLogo.innerHTML =
+`<img src="${imageUrl}" class="w-full h-full object-contain rounded-[25px]">`;
+
+});
+
+/* رفع الملفات */
+
+async function uploadFileToSupabase(file){
+
+const fileName =
+`${Date.now()}-${file.name}`;
+
+const { error } =
+await supabase.storage
+.from('school-files')
+.upload(fileName,file);
+
+if(error){
+
+alert('فشل رفع الملف');
+return null;
+
+}
+
+const { data } =
+supabase.storage
+.from('school-files')
+.getPublicUrl(fileName);
+
+return data.publicUrl;
+
+}
+
+</script>
 
 </body>
 </html>
-```
