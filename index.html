@@ -1,0 +1,540 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+نجم الدين همادي - التعليم هو مفتاح المستقبل
+</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+font-family:'Noto Naskh Arabic',serif;
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at top right, rgba(59,130,246,0.18), transparent 25%),
+radial-gradient(circle at bottom left, rgba(234,179,8,0.18), transparent 30%),
+linear-gradient(135deg,#f0fdf4 0%,#eff6ff 40%,#ffffff 100%);
+background-attachment:fixed;
+overflow-x:hidden;
+}
+
+.glass{
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(18px);
+}
+
+.card-hover{
+transition:0.3s;
+}
+
+.card-hover:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 30px rgba(0,0,0,0.08);
+}
+
+.active-level{
+background:#bbf7d0;
+color:#166534;
+border:2px solid #86efac;
+}
+
+.sidebar-link:hover{
+background:#fff7d6;
+color:#b7791f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div
+id="login-page"
+class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-yellow-50 z-50">
+
+<div class="bg-white w-[95%] max-w-md rounded-[35px] p-10 shadow-2xl">
+
+<h1 class="text-4xl font-black text-center text-blue-900 mb-3">
+تسجيل دخول المدير
+</h1>
+
+<p class="text-center text-slate-500 mb-8">
+التعليم هو مفتاح المستقبل
+</p>
+
+<input
+id="admin-username"
+type="text"
+placeholder="اسم المستخدم"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4 outline-none focus:border-blue-400">
+
+<input
+id="admin-password"
+type="password"
+placeholder="كلمة المرور"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-6 outline-none focus:border-blue-400">
+
+<button
+id="login-btn"
+class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black">
+
+دخول
+
+</button>
+
+<p
+id="login-error"
+class="hidden text-red-500 text-center mt-4 font-bold">
+
+معلومات الدخول غير صحيحة
+
+</p>
+
+</div>
+
+</div>
+
+<!-- PLATFORM -->
+
+<div id="platform" class="hidden min-h-screen glass">
+
+<div class="grid lg:grid-cols-[320px_1fr] min-h-screen">
+
+<!-- SIDEBAR -->
+
+<aside class="bg-yellow-50 border-l border-yellow-100 p-6 flex flex-col justify-between">
+
+<div>
+
+<div class="text-center mb-10">
+
+<div
+id="sidebar-logo"
+class="w-32 h-32 mx-auto rounded-[30px] bg-white flex items-center justify-center shadow-xl overflow-hidden text-7xl">
+
+⭐
+
+</div>
+
+<label class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl cursor-pointer font-bold text-sm">
+
+تغيير الشعار
+
+<input
+type="file"
+id="logo-input"
+accept="image/*"
+class="hidden">
+
+</label>
+
+<h1 class="text-3xl font-extrabold text-blue-900 mt-5">
+نجم الدين همادي
+</h1>
+
+<p class="text-slate-500 mt-2">
+التعليم هو مفتاح المستقبل
+</p>
+
+</div>
+
+<nav class="space-y-3">
+
+<a
+href="#"
+id="home-btn"
+class="sidebar-link flex items-center justify-between bg-blue-50 text-blue-700 px-5 py-4 rounded-2xl font-bold transition">
+
+<span>الرئيسية</span>
+
+<span>🏠</span>
+
+</a>
+
+<a
+href="#"
+id="toggle-subjects"
+class="sidebar-link flex items-center justify-between px-5 py-4 rounded-2xl font-bold transition">
+
+<span>المواد</span>
+
+<span>📚</span>
+
+</a>
+
+</nav>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="p-6 md:p-10">
+
+<!-- HOME -->
+
+<div
+id="home-page"
+class="flex flex-col items-center justify-center text-center py-10">
+
+<div
+id="main-logo"
+class="w-[350px] md:w-[500px] bg-white rounded-[40px] shadow-2xl border-8 border-blue-100 overflow-hidden p-10 flex items-center justify-center mb-8">
+
+<div class="text-[180px]">
+⭐
+</div>
+
+</div>
+
+<h1 class="text-5xl font-black text-blue-900 mb-4">
+نجم الدين همادي
+</h1>
+
+<p class="text-2xl text-yellow-500 font-black">
+التعليم هو مفتاح المستقبل
+</p>
+
+</div>
+
+<!-- SUBJECTS -->
+
+<div id="subjects-page" class="hidden">
+
+<div
+id="level-page"
+class="hidden bg-white rounded-[35px] p-8 shadow-xl border border-green-100 mb-10">
+
+<button
+id="back-to-levels"
+class="mb-6 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-5 py-3 rounded-2xl font-bold">
+
+← العودة إلى المستويات
+
+</button>
+
+<h2
+id="level-title"
+class="text-5xl font-black text-green-700 mb-8 text-center"></h2>
+
+<div
+id="level-subjects-container"
+class="grid md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
+
+</div>
+
+<div
+id="levels-list"
+class="flex gap-3 overflow-x-auto pb-3 mb-8">
+
+<button class="level-btn active-level px-7 py-3 rounded-full font-bold border-2 border-green-200">
+السنة الأولى
+</button>
+
+<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">
+السنة الثانية
+</button>
+
+<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">
+السنة الثالثة
+</button>
+
+<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">
+السنة الرابعة
+</button>
+
+<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">
+السنة الخامسة
+</button>
+
+<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">
+السنة السادسة
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</div>
+
+<script>
+
+/* LOGIN */
+
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "123456";
+
+document
+.getElementById('login-btn')
+.addEventListener('click',()=>{
+
+const username =
+document.getElementById('admin-username').value;
+
+const password =
+document.getElementById('admin-password').value;
+
+if(
+username === ADMIN_USERNAME &&
+password === ADMIN_PASSWORD
+){
+
+document
+.getElementById('login-page')
+.classList.add('hidden');
+
+document
+.getElementById('platform')
+.classList.remove('hidden');
+
+}else{
+
+document
+.getElementById('login-error')
+.classList.remove('hidden');
+
+}
+
+});
+
+/* NAVIGATION */
+
+const homeBtn =
+document.getElementById('home-btn');
+
+const homePage =
+document.getElementById('home-page');
+
+const subjectsPage =
+document.getElementById('subjects-page');
+
+const toggleSubjectsBtn =
+document.getElementById('toggle-subjects');
+
+homeBtn.addEventListener('click',(e)=>{
+
+e.preventDefault();
+
+homePage.classList.remove('hidden');
+
+subjectsPage.classList.add('hidden');
+
+});
+
+toggleSubjectsBtn.addEventListener('click',(e)=>{
+
+e.preventDefault();
+
+homePage.classList.add('hidden');
+
+subjectsPage.classList.remove('hidden');
+
+});
+
+/* LOGO */
+
+const logoInput =
+document.getElementById('logo-input');
+
+const sidebarLogo =
+document.getElementById('sidebar-logo');
+
+const mainLogo =
+document.getElementById('main-logo');
+
+function loadSavedLogo(){
+
+const savedLogo =
+localStorage.getItem('platformLogo');
+
+if(savedLogo){
+
+sidebarLogo.innerHTML = `
+<img
+src="${savedLogo}"
+class="w-full h-full object-cover">
+`;
+
+mainLogo.innerHTML = `
+<img
+src="${savedLogo}"
+class="w-full h-full object-contain rounded-[25px]">
+`;
+
+}
+
+}
+
+logoInput.addEventListener('change',(e)=>{
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const imageSrc =
+event.target.result;
+
+localStorage.setItem(
+'platformLogo',
+imageSrc
+);
+
+sidebarLogo.innerHTML = `
+<img
+src="${imageSrc}"
+class="w-full h-full object-cover">
+`;
+
+mainLogo.innerHTML = `
+<img
+src="${imageSrc}"
+class="w-full h-full object-contain rounded-[25px]">
+`;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+loadSavedLogo();
+
+/* LEVELS */
+
+const levelPage =
+document.getElementById('level-page');
+
+const levelsList =
+document.getElementById('levels-list');
+
+const levelTitle =
+document.getElementById('level-title');
+
+const levelSubjectsContainer =
+document.getElementById('level-subjects-container');
+
+const backToLevels =
+document.getElementById('back-to-levels');
+
+const subjectsByLevel = {
+
+'السنة الأولى': [
+'الرياضيات',
+'اللغة العربية',
+'الإيقاظ العلمي'
+],
+
+'السنة الثانية': [
+'الرياضيات',
+'اللغة العربية',
+'الإيقاظ العلمي'
+],
+
+'السنة الثالثة': [
+'الرياضيات',
+'اللغة العربية',
+'الفرنسية',
+'الإيقاظ العلمي'
+],
+
+'السنة الرابعة': [
+'الرياضيات',
+'اللغة العربية',
+'الفرنسية',
+'الإيقاظ العلمي'
+],
+
+'السنة الخامسة': [
+'الرياضيات',
+'اللغة العربية',
+'الفرنسية',
+'الإيقاظ العلمي'
+],
+
+'السنة السادسة': [
+'الرياضيات',
+'اللغة العربية',
+'الفرنسية',
+'الإيقاظ العلمي'
+]
+
+};
+
+function createSubjectCard(subjectName){
+
+return `
+
+<div class="card-hover bg-white rounded-[30px] p-7 border border-slate-100 shadow-sm">
+
+<h3 class="text-3xl font-black text-blue-900 mb-5">
+${subjectName}
+</h3>
+
+<div class="grid gap-4">
+
+<div class="folder-box bg-blue-50 rounded-2xl p-4">
+
+<div class="flex justify-between items-center mb-3">
+
+<h4 class="font-black text-blue-700">
+📘 الدروس
+</h4>
+
+<button
+class="upload-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-bold">
+
+رفع
+
+</button>
+
+</div>
+
+<div class="files-list space-y-2"></div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
+```
