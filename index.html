@@ -3,9 +3,7 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
@@ -15,17 +13,15 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700;800&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
 font-family:'Noto Naskh Arabic',serif;
+box-sizing:border-box;
 }
 
 body{
@@ -63,6 +59,11 @@ background:#fff7d6;
 color:#b7791f;
 }
 
+.modal-bg{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(5px);
+}
+
 </style>
 
 </head>
@@ -73,9 +74,9 @@ color:#b7791f;
 
 <div
 id="login-page"
-class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-yellow-50 z-50">
+class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-yellow-50 z-50 p-4">
 
-<div class="bg-white w-[95%] max-w-md rounded-[35px] p-10 shadow-2xl">
+<div class="bg-white w-full max-w-md rounded-[35px] p-8 shadow-2xl">
 
 <h1 class="text-4xl font-black text-center text-blue-900 mb-3">
 تسجيل دخول المدير
@@ -89,19 +90,19 @@ class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blu
 id="admin-username"
 type="text"
 placeholder="اسم المستخدم"
-class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4 outline-none focus:border-blue-400">
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
 
 <input
 id="admin-password"
 type="password"
 placeholder="كلمة المرور"
-class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-6 outline-none focus:border-blue-400">
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-6">
 
 <button
 id="login-btn"
 class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black">
 
-دخول
+دخول المدير
 
 </button>
 
@@ -110,6 +111,86 @@ id="login-error"
 class="hidden text-red-500 text-center mt-4 font-bold">
 
 معلومات الدخول غير صحيحة
+
+</p>
+
+<div class="mt-8 border-t pt-6">
+
+<h2 class="text-2xl font-black text-green-700 text-center mb-4">
+دخول التلاميذ
+</h2>
+
+<input
+id="student-name"
+type="text"
+placeholder="اسم التلميذ"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
+
+<input
+id="student-password"
+type="password"
+placeholder="كلمة المرور"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
+
+<button
+id="student-login-btn"
+class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-black">
+
+دخول التلميذ
+
+</button>
+
+<p
+id="student-error"
+class="hidden text-red-500 text-center mt-3 font-bold">
+
+بيانات التلميذ غير صحيحة
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DOWNLOAD MODAL -->
+
+<div
+id="download-login-modal"
+class="hidden fixed inset-0 z-50 flex items-center justify-center modal-bg p-4">
+
+<div class="bg-white w-full max-w-md rounded-[35px] p-8 shadow-2xl">
+
+<h2 class="text-3xl font-black text-center text-blue-900 mb-4">
+تأكيد التحميل
+</h2>
+
+<input
+id="download-student-name"
+type="text"
+placeholder="اسم التلميذ"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
+
+<input
+id="download-student-password"
+type="password"
+placeholder="كلمة المرور"
+class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
+
+<button
+id="download-login-btn"
+class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-black">
+
+تحميل الملف
+
+</button>
+
+<p
+id="download-error"
+class="hidden text-red-500 text-center mt-4 font-bold">
+
+بيانات الدخول غير صحيحة
 
 </p>
 
@@ -125,9 +206,7 @@ class="hidden text-red-500 text-center mt-4 font-bold">
 
 <!-- SIDEBAR -->
 
-<aside class="bg-yellow-50 border-l border-yellow-100 p-6 flex flex-col justify-between">
-
-<div>
+<aside class="bg-yellow-50 border-l border-yellow-100 p-6">
 
 <div class="text-center mb-10">
 
@@ -166,10 +245,9 @@ class="hidden">
 <a
 href="#"
 id="home-btn"
-class="sidebar-link flex items-center justify-between bg-blue-50 text-blue-700 px-5 py-4 rounded-2xl font-bold transition">
+class="sidebar-link flex items-center justify-between bg-blue-50 text-blue-700 px-5 py-4 rounded-2xl font-bold">
 
 <span>الرئيسية</span>
-
 <span>🏠</span>
 
 </a>
@@ -177,25 +255,20 @@ class="sidebar-link flex items-center justify-between bg-blue-50 text-blue-700 p
 <a
 href="#"
 id="toggle-subjects"
-class="sidebar-link flex items-center justify-between px-5 py-4 rounded-2xl font-bold transition">
+class="sidebar-link flex items-center justify-between px-5 py-4 rounded-2xl font-bold">
 
 <span>المواد</span>
-
 <span>📚</span>
 
 </a>
 
 </nav>
 
-</div>
-
 </aside>
 
 <!-- MAIN -->
 
 <main class="p-6 md:p-10">
-
-<!-- HOME -->
 
 <div
 id="home-page"
@@ -233,7 +306,7 @@ class="hidden bg-white rounded-[35px] p-8 shadow-xl border border-green-100 mb-1
 id="back-to-levels"
 class="mb-6 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-5 py-3 rounded-2xl font-bold">
 
-← العودة إلى المستويات
+← العودة
 
 </button>
 
@@ -287,13 +360,23 @@ class="flex gap-3 overflow-x-auto pb-3 mb-8">
 
 <script>
 
-/* LOGIN */
-
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "123456";
 
-document
-.getElementById('login-btn')
+let currentDownloadLink = null;
+let isStudent = false;
+
+const students = [
+
+{name:"ahmed",password:"123"},
+{name:"sara",password:"456"},
+{name:"mohamed",password:"789"}
+
+];
+
+/* LOGIN */
+
+document.getElementById('login-btn')
 .addEventListener('click',()=>{
 
 const username =
@@ -307,18 +390,53 @@ username === ADMIN_USERNAME &&
 password === ADMIN_PASSWORD
 ){
 
-document
-.getElementById('login-page')
+document.getElementById('login-page')
 .classList.add('hidden');
 
-document
-.getElementById('platform')
+document.getElementById('platform')
 .classList.remove('hidden');
 
 }else{
 
-document
-.getElementById('login-error')
+document.getElementById('login-error')
+.classList.remove('hidden');
+
+}
+
+});
+
+/* STUDENT LOGIN */
+
+document.getElementById('student-login-btn')
+.addEventListener('click',()=>{
+
+const studentName =
+document.getElementById('student-name').value.trim();
+
+const studentPassword =
+document.getElementById('student-password').value.trim();
+
+const foundStudent =
+students.find(student =>
+
+student.name === studentName &&
+student.password === studentPassword
+
+);
+
+if(foundStudent){
+
+isStudent = true;
+
+document.getElementById('login-page')
+.classList.add('hidden');
+
+document.getElementById('platform')
+.classList.remove('hidden');
+
+}else{
+
+document.getElementById('student-error')
 .classList.remove('hidden');
 
 }
@@ -327,34 +445,28 @@ document
 
 /* NAVIGATION */
 
-const homeBtn =
-document.getElementById('home-btn');
-
 const homePage =
 document.getElementById('home-page');
 
 const subjectsPage =
 document.getElementById('subjects-page');
 
-const toggleSubjectsBtn =
-document.getElementById('toggle-subjects');
-
-homeBtn.addEventListener('click',(e)=>{
+document.getElementById('home-btn')
+.addEventListener('click',(e)=>{
 
 e.preventDefault();
 
 homePage.classList.remove('hidden');
-
 subjectsPage.classList.add('hidden');
 
 });
 
-toggleSubjectsBtn.addEventListener('click',(e)=>{
+document.getElementById('toggle-subjects')
+.addEventListener('click',(e)=>{
 
 e.preventDefault();
 
 homePage.classList.add('hidden');
-
 subjectsPage.classList.remove('hidden');
 
 });
@@ -377,17 +489,11 @@ localStorage.getItem('platformLogo');
 
 if(savedLogo){
 
-sidebarLogo.innerHTML = `
-<img
-src="${savedLogo}"
-class="w-full h-full object-cover">
-`;
+sidebarLogo.innerHTML =
+`<img src="${savedLogo}" class="w-full h-full object-cover">`;
 
-mainLogo.innerHTML = `
-<img
-src="${savedLogo}"
-class="w-full h-full object-contain rounded-[25px]">
-`;
+mainLogo.innerHTML =
+`<img src="${savedLogo}" class="w-full h-full object-contain rounded-[25px]">`;
 
 }
 
@@ -403,25 +509,15 @@ const reader = new FileReader();
 
 reader.onload = function(event){
 
-const imageSrc =
-event.target.result;
+const imageSrc = event.target.result;
 
-localStorage.setItem(
-'platformLogo',
-imageSrc
-);
+localStorage.setItem('platformLogo',imageSrc);
 
-sidebarLogo.innerHTML = `
-<img
-src="${imageSrc}"
-class="w-full h-full object-cover">
-`;
+sidebarLogo.innerHTML =
+`<img src="${imageSrc}" class="w-full h-full object-cover">`;
 
-mainLogo.innerHTML = `
-<img
-src="${imageSrc}"
-class="w-full h-full object-contain rounded-[25px]">
-`;
+mainLogo.innerHTML =
+`<img src="${imageSrc}" class="w-full h-full object-contain rounded-[25px]">`;
 
 };
 
@@ -432,6 +528,17 @@ reader.readAsDataURL(file);
 loadSavedLogo();
 
 /* LEVELS */
+
+const subjectsByLevel = {
+
+'السنة الأولى':['الرياضيات','اللغة العربية','الإيقاظ العلمي'],
+'السنة الثانية':['الرياضيات','اللغة العربية','الإيقاظ العلمي'],
+'السنة الثالثة':['الرياضيات','اللغة العربية','الفرنسية','الإيقاظ العلمي'],
+'السنة الرابعة':['الرياضيات','اللغة العربية','الفرنسية','الإيقاظ العلمي'],
+'السنة الخامسة':['الرياضيات','اللغة العربية','الفرنسية','الإيقاظ العلمي'],
+'السنة السادسة':['الرياضيات','اللغة العربية','الفرنسية','الإيقاظ العلمي']
+
+};
 
 const levelPage =
 document.getElementById('level-page');
@@ -445,53 +552,6 @@ document.getElementById('level-title');
 const levelSubjectsContainer =
 document.getElementById('level-subjects-container');
 
-const backToLevels =
-document.getElementById('back-to-levels');
-
-const subjectsByLevel = {
-
-'السنة الأولى': [
-'الرياضيات',
-'اللغة العربية',
-'الإيقاظ العلمي'
-],
-
-'السنة الثانية': [
-'الرياضيات',
-'اللغة العربية',
-'الإيقاظ العلمي'
-],
-
-'السنة الثالثة': [
-'الرياضيات',
-'اللغة العربية',
-'الفرنسية',
-'الإيقاظ العلمي'
-],
-
-'السنة الرابعة': [
-'الرياضيات',
-'اللغة العربية',
-'الفرنسية',
-'الإيقاظ العلمي'
-],
-
-'السنة الخامسة': [
-'الرياضيات',
-'اللغة العربية',
-'الفرنسية',
-'الإيقاظ العلمي'
-],
-
-'السنة السادسة': [
-'الرياضيات',
-'اللغة العربية',
-'الفرنسية',
-'الإيقاظ العلمي'
-]
-
-};
-
 function createSubjectCard(subjectName){
 
 return `
@@ -504,16 +564,32 @@ ${subjectName}
 
 <div class="grid gap-4">
 
-<div class="folder-box bg-blue-50 rounded-2xl p-4">
+${createFolder('📘 الدروس','blue')}
+${createFolder('📝 التمارين','yellow')}
+${createFolder('📄 الاختبارات','red')}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+function createFolder(title,color){
+
+return `
+
+<div class="folder-box bg-${color}-50 rounded-2xl p-4">
 
 <div class="flex justify-between items-center mb-3">
 
-<h4 class="font-black text-blue-700">
-📘 الدروس
+<h4 class="font-black text-${color}-700">
+${title}
 </h4>
 
 <button
-class="upload-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-bold">
+class="upload-btn bg-${color}-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
 
 رفع
 
@@ -525,13 +601,359 @@ class="upload-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl 
 
 </div>
 
+`;
+
+}
+
+function renderSubjects(levelName){
+
+levelPage.classList.remove('hidden');
+
+levelsList.classList.add('hidden');
+
+levelTitle.textContent = levelName;
+
+levelSubjectsContainer.innerHTML='';
+
+subjectsByLevel[levelName].forEach(subject=>{
+
+levelSubjectsContainer.innerHTML +=
+createSubjectCard(subject);
+
+});
+
+attachUploadEvents();
+renderSavedFiles();
+
+}
+
+document.querySelectorAll('.level-btn')
+.forEach((btn)=>{
+
+btn.addEventListener('click',()=>{
+
+document.querySelectorAll('.level-btn')
+.forEach((b)=>{
+
+b.classList.remove('active-level');
+
+});
+
+btn.classList.add('active-level');
+
+renderSubjects(btn.textContent.trim());
+
+});
+
+});
+
+document.getElementById('back-to-levels')
+.addEventListener('click',()=>{
+
+levelPage.classList.add('hidden');
+levelsList.classList.remove('hidden');
+
+});
+
+/* FILES */
+
+function attachUploadEvents(){
+
+document.querySelectorAll('.upload-btn')
+.forEach((button)=>{
+
+button.onclick = null;
+
+button.addEventListener('click',()=>{
+
+const input =
+document.createElement('input');
+
+input.type='file';
+
+input.accept =
+'.pdf,.doc,.docx,.png,.jpg,.jpeg,.mp4';
+
+input.addEventListener('change',(e)=>{
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const fileData = event.target.result;
+
+const folder =
+button.closest('.folder-box');
+
+const folderName =
+folder.querySelector('h4').textContent.trim();
+
+const subjectName =
+button.closest('.card-hover')
+.querySelector('h3')
+.textContent.trim();
+
+const levelName =
+document.getElementById('level-title')
+.textContent.trim();
+
+const filesKey =
+`${levelName}-${subjectName}-${folderName}`;
+
+const savedFiles =
+JSON.parse(localStorage.getItem(filesKey)||'[]');
+
+savedFiles.push({
+
+name:file.name,
+data:fileData
+
+});
+
+localStorage.setItem(
+filesKey,
+JSON.stringify(savedFiles)
+);
+
+renderSavedFiles();
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+input.click();
+
+});
+
+});
+
+}
+
+function renderSavedFiles(){
+
+document.querySelectorAll('.folder-box')
+.forEach((folder)=>{
+
+const filesList =
+folder.querySelector('.files-list');
+
+filesList.innerHTML = '';
+
+const folderName =
+folder.querySelector('h4').textContent.trim();
+
+const subjectName =
+folder.closest('.card-hover')
+.querySelector('h3')
+.textContent.trim();
+
+const levelName =
+document.getElementById('level-title')
+.textContent.trim();
+
+const filesKey =
+`${levelName}-${subjectName}-${folderName}`;
+
+const savedFiles =
+JSON.parse(localStorage.getItem(filesKey)||'[]');
+
+savedFiles.forEach((file,index)=>{
+
+const item =
+document.createElement('div');
+
+item.className =
+'bg-white rounded-2xl p-4 border border-slate-200';
+
+item.innerHTML = `
+
+<div class="flex justify-between items-center gap-3">
+
+<p class="font-bold text-blue-700 flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
+${file.name}
+</p>
+
+<div class="flex gap-2">
+
+<button class="open-file bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
+فتح
+</button>
+
+<button class="download-btn bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
+تحميل
+</button>
+
+<button class="delete-btn bg-red-600 text-white px-3 py-2 rounded-xl text-sm font-bold">
+🗑️
+</button>
+
 </div>
 
 </div>
 
 `;
 
+/* OPEN FILE */
+
+item.querySelector('.open-file')
+.addEventListener('click',()=>{
+
+const extension =
+file.name.split('.').pop().toLowerCase();
+
+const previewWindow =
+window.open('', '_blank');
+
+if(extension === 'pdf'){
+
+previewWindow.document.write(`
+<iframe src="${file.data}" style="width:100%;height:100vh;border:none;"></iframe>
+`);
+
+}else if(
+extension === 'png' ||
+extension === 'jpg' ||
+extension === 'jpeg'
+){
+
+previewWindow.document.write(`
+<img src="${file.data}" style="max-width:100%;">
+`);
+
+}else if(extension === 'mp4'){
+
+previewWindow.document.write(`
+<video controls autoplay style="width:100%;height:100vh;">
+<source src="${file.data}">
+</video>
+`);
+
+}else{
+
+const link =
+document.createElement('a');
+
+link.href = file.data;
+
+link.download = file.name;
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+previewWindow.close();
+
 }
+
+});
+
+/* DOWNLOAD */
+
+item.querySelector('.download-btn')
+.addEventListener('click',()=>{
+
+currentDownloadLink = {
+
+url:file.data,
+name:file.name
+
+};
+
+document.getElementById('download-login-modal')
+.classList.remove('hidden');
+
+});
+
+/* DELETE */
+
+item.querySelector('.delete-btn')
+.addEventListener('click',()=>{
+
+savedFiles.splice(index,1);
+
+localStorage.setItem(
+filesKey,
+JSON.stringify(savedFiles)
+);
+
+renderSavedFiles();
+
+});
+
+filesList.appendChild(item);
+
+});
+
+if(isStudent){
+
+document.querySelectorAll('.upload-btn,.delete-btn')
+.forEach(btn=>{
+
+btn.style.display='none';
+
+});
+
+}
+
+});
+
+}
+
+/* DOWNLOAD LOGIN */
+
+document.getElementById('download-login-btn')
+.addEventListener('click',()=>{
+
+const studentName =
+document.getElementById('download-student-name')
+.value.trim();
+
+const studentPassword =
+document.getElementById('download-student-password')
+.value.trim();
+
+const foundStudent =
+students.find(student =>
+
+student.name === studentName &&
+student.password === studentPassword
+
+);
+
+if(foundStudent){
+
+const link =
+document.createElement('a');
+
+link.href = currentDownloadLink.url;
+
+link.download = currentDownloadLink.name;
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+document.getElementById('download-login-modal')
+.classList.add('hidden');
+
+}else{
+
+document.getElementById('download-error')
+.classList.remove('hidden');
+
+}
+
+});
 
 </script>
 
