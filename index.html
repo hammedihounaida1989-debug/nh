@@ -956,6 +956,222 @@ document.getElementById('download-error')
 });
 
 </script>
+```html id="supa22"
+<!-- أضف هذا قبل </body> مباشرة -->
+
+<script type="module">
+
+import { createClient }
+from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+/* SUPABASE */
+
+```javascript id="4odf6q"
+const SUPABASE_URL =
+'https://orrmwdjebfawekocbjrx.supabase.co'
+
+const SUPABASE_KEY =
+'sb_publishable_foc4DXyMgwjQ1JMM3kzrQA_ybbbia7X'
+```
+
+
+const supabase =
+createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+)
+
+/* SAVE LOGO */
+
+logoInput.addEventListener('change', async (e)=>{
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const fileName =
+`logo-${Date.now()}-${file.name}`;
+
+const { error } =
+await supabase.storage
+.from('platform')
+.upload(fileName,file);
+
+if(error){
+
+alert('فشل رفع الشعار');
+
+return;
+
+}
+
+const { data } =
+supabase.storage
+.from('platform')
+.getPublicUrl(fileName);
+
+const imageUrl =
+data.publicUrl;
+
+localStorage.setItem(
+'platformLogo',
+imageUrl
+);
+
+sidebarLogo.innerHTML = `
+<img
+src="${imageUrl}"
+class="w-full h-full object-cover">
+`;
+
+mainLogo.innerHTML = `
+<img
+src="${imageUrl}"
+class="w-full h-full object-contain rounded-[25px]">
+`;
+
+});
+
+/* LOAD LOGO */
+
+function loadSavedLogo(){
+
+const savedLogo =
+localStorage.getItem('platformLogo');
+
+if(savedLogo){
+
+sidebarLogo.innerHTML = `
+<img
+src="${savedLogo}"
+class="w-full h-full object-cover">
+`;
+
+mainLogo.innerHTML = `
+<img
+src="${savedLogo}"
+class="w-full h-full object-contain rounded-[25px]">
+`;
+
+}
+
+}
+
+/* FILE UPLOAD */
+
+async function uploadFileToSupabase(file){
+
+const fileName =
+`${Date.now()}-${file.name}`;
+
+const { error } =
+await supabase.storage
+.from('platform')
+.upload(fileName,file);
+
+if(error){
+
+alert('فشل رفع الملف');
+
+return null;
+
+}
+
+const { data } =
+supabase.storage
+.from('school-files')
+.getPublicUrl(fileName);
+
+return data.publicUrl;
+
+}
+
+/* ATTACH UPLOAD EVENTS */
+
+function attachUploadEvents(){
+
+document
+.querySelectorAll('.upload-btn')
+.forEach((button)=>{
+
+button.onclick = null;
+
+button.addEventListener('click',()=>{
+
+const input =
+document.createElement('input');
+
+input.type='file';
+
+input.accept =
+'.pdf,.doc,.docx,.png,.jpg,.jpeg,.mp4';
+
+input.addEventListener('change',
+async (e)=>{
+
+const file =
+e.target.files[0];
+
+if(!file) return;
+
+const fileUrl =
+await uploadFileToSupabase(file);
+
+if(!fileUrl) return;
+
+const folder =
+button.closest('.folder-box');
+
+const folderName =
+folder.querySelector('h4')
+.textContent.trim();
+
+const subjectName =
+button.closest('.card-hover')
+.querySelector('h3')
+.textContent.trim();
+
+const levelName =
+document.getElementById('level-title')
+.textContent.trim();
+
+const filesKey =
+`${levelName}-${subjectName}-${folderName}`;
+
+const savedFiles =
+JSON.parse(
+localStorage.getItem(filesKey)
+|| '[]'
+);
+
+savedFiles.push({
+
+name:file.name,
+data:fileUrl
+
+});
+
+localStorage.setItem(
+filesKey,
+JSON.stringify(savedFiles)
+);
+
+renderSavedFiles();
+
+});
+
+input.click();
+
+});
+
+});
+
+}
+
+loadSavedLogo();
+
+</script>
+```
 
 </body>
 </html>
