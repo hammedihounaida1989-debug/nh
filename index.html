@@ -392,8 +392,20 @@ const filesList = folder.querySelector('.files-list');
 
 filesList.innerHTML = '';
 
-const folderName =
+let folderName =
 folder.querySelector('h4').textContent.trim();
+
+if(folderName.includes('الدروس')){
+folderName = 'lessons';
+}
+
+if(folderName.includes('التمارين')){
+folderName = 'exercises';
+}
+
+if(folderName.includes('الاختبارات')){
+folderName = 'tests';
+}
 
 const subjectName =
 folder.closest('.card-hover')
