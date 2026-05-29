@@ -354,35 +354,58 @@ window.supabase = supabase;
 
 async function uploadFileToSupabase(file,levelName,subjectName,folderName){
 
-const filePath =
-`${levelName}/${subjectName}/${folderName}/${Date.now()}-${file.name}`;
+try{
 
-const { error } = await supabase.storage
+const safeLevel =
+levelName.replaceAll('/','-');
+
+const safeSubject =
+subjectName.replaceAll('/','-');
+
+const safeFolder =
+folderName.replaceAll('/','-');
+
+const filePath =
+`${safeLevel}/${safeSubject}/${safeFolder}/${Date.now()}-${file.name}`;
+
+const { data,error } =
+await supabase.storage
 .from('school-files')
 .upload(filePath,file,{
+cacheControl:'3600',
 upsert:true
 });
+
+console.log(data);
 console.log(error);
+
 if(error){
 
-console.log(error);
-
-alert('فشل رفع الملف');
+alert(error.message);
 
 return null;
 }
 
-const { data } = supabase.storage
+const { data:publicData } =
+supabase.storage
 .from('school-files')
 .getPublicUrl(filePath);
 
-return {
-url:data.publicUrl,
-name:file.name,
-path:filePath
+return{
+url:publicData.publicUrl,
+name:file.name
 };
 
+}catch(err){
+
+console.log(err);
+
+alert('حدث خطأ أثناء رفع الملف');
+
+return null;
 }
+
+}}
 
 /* تحميل الملفات */
 
