@@ -338,6 +338,7 @@ levelsList.classList.remove('hidden');
 
 </script>
 
+```html
 <script type="module">
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
@@ -349,86 +350,193 @@ const supabase = createClient(SUPABASE_URL,SUPABASE_KEY)
 
 window.supabase = supabase;
 
-async function loadSavedLogo(){
+/* رفع الملفات */
 
-const savedLogo = localStorage.getItem('platformLogo');
+async function uploadFileToSupabase(file,levelName,subjectName,folderName){
 
-if(savedLogo){
-sidebarLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-cover">`;
-mainLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain rounded-[25px]">`;
-}
-}
-
-logoInput.addEventListener('change', async (e)=>{
-
-const file = e.target.files[0];
-if(!file) return;
-
-const fileName = `logo-${Date.now()}-${file.name}`;
+const filePath =
+`${levelName}/${subjectName}/${folderName}/${Date.now()}-${file.name}`;
 
 const { error } = await supabase.storage
 .from('school-files')
-.upload(fileName,file);
+.upload(filePath,file);
 
 if(error){
-alert('فشل رفع الشعار');
-return;
-}
 
-const { data } = supabase.storage
-.from('school-files')
-.getPublicUrl(fileName);
+console.log(error);
 
-const imageUrl = data.publicUrl;
-
-localStorage.setItem('platformLogo',imageUrl);
-
-sidebarLogo.innerHTML = `<img src="${imageUrl}" class="w-full h-full object-cover">`;
-mainLogo.innerHTML = `<img src="${imageUrl}" class="w-full h-full object-contain rounded-[25px]">`;
-
-});
-
-async function uploadFileToSupabase(file){
-
-const fileName = `${Date.now()}-${file.name}`;
-
-const { error } = await supabase.storage
-.from('school-files')
-.upload(fileName,file);
-
-if(error){
 alert('فشل رفع الملف');
+
 return null;
 }
 
 const { data } = supabase.storage
 .from('school-files')
-.getPublicUrl(fileName);
+.getPublicUrl(filePath);
 
 return {
 url:data.publicUrl,
-name:file.name
+name:file.name,
+path:filePath
 };
+
 }
+
+/* تحميل الملفات */
+
+window.renderSavedFiles = async function(){
+
+document.querySelectorAll('.folder-box').forEach(async(folder)=>{
+
+const filesList = folder.querySelector('.files-list');
+
+filesList.innerHTML = '';
+
+const folderName =
+folder.querySelector('h4').textContent.trim();
+
+const subjectName =
+folder.closest('.card-hover')
+.querySelector('h3')
+.textContent.trim();
+
+const levelName =
+document.getElementById('level-title')
+.textContent.trim();
+
+const folderPath =
+`${levelName}/${subjectName}/${folderName}`;
+
+const { data,error } =
+await supabase.storage
+.from('school-files')
+.list(folderPath,{
+limit:100
+});
+
+if(error){
+
+console.log(error);
+
+return;
+}
+
+data.forEach((file)=>{
+
+const fileUrl =
+`${SUPABASE_URL}/storage/v1/object/public/school-files/${folderPath}/${file.name}`;
+
+const item =
+document.createElement('div');
+
+item.className =
+'bg-white rounded-2xl p-4 border border-slate-200';
+
+item.innerHTML = `
+
+<div class="flex justify-between items-center gap-3">
+
+<p class="font-bold text-blue-700 flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
+${file.name}
+</p>
+
+<div class="flex gap-2">
+
+<button class="open-file bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
+فتح
+</button>
+
+<button class="download-btn bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
+تحميل
+</button>
+
+</div>
+
+</div>
+
+`;
+
+item.querySelector('.open-file')
+.addEventListener('click',()=>{
+
+window.open(fileUrl,'_blank');
+
+});
+
+item.querySelector('.download-btn')
+.addEventListener('click',()=>{
+
+const link =
+document.createElement('a');
+
+link.href = fileUrl;
+
+link.download = file.name;
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+});
+
+filesList.appendChild(item);
+
+});
+
+});
+
+}
+
+/* أزرار الرفع */
 
 window.attachUploadEvents = function(){
 
-document.querySelectorAll('.upload-btn').forEach((button)=>{
+document.querySelectorAll('.upload-btn')
+.forEach((button)=>{
 
 button.onclick = null;
 
 button.addEventListener('click',()=>{
 
-const input = document.createElement('input');
-input.type='file';
-input.accept='.pdf,.doc,.docx,.png,.jpg,.jpeg,.mp4';
+const input =
+document.createElement('input');
 
-input.addEventListener('change', async (e)=>{
+input.type='file';
+
+input.accept =
+'.pdf,.doc,.docx,.png,.jpg,.jpeg,.mp4';
+
+input.addEventListener('change', async(e)=>{
 
 const file = e.target.files[0];
+
 if(!file) return;
 
-const uploaded = await uploadFileToSupabase(file);
+const folder =
+button.closest('.folder-box');
+
+const folderName =
+folder.querySelector('h4').textContent.trim();
+
+const subjectName =
+button.closest('.card-hover')
+.querySelector('h3')
+.textContent.trim();
+
+const levelName =
+document.getElementById('level-title')
+.textContent.trim();
+
+const uploaded =
+await uploadFileToSupabase(
+file,
+levelName,
+subjectName,
+folderName
+);
+
 if(!uploaded) return;
 
 renderSavedFiles();
@@ -440,7 +548,12 @@ input.click();
 });
 
 });
+
 }
+
+</script>
+```
+
 
 window.renderSavedFiles = async function(){
 
