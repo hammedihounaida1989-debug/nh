@@ -554,62 +554,6 @@ input.click();
 </script>
 ```
 
-
-window.renderSavedFiles = async function(){
-
-document.querySelectorAll('.folder-box').forEach(async (folder)=>{
-
-const filesList = folder.querySelector('.files-list');
-filesList.innerHTML = '';
-
-const { data, error } = await supabase.storage
-.from('school-files')
-.list('',{ limit:100 });
-
-if(error) return;
-
-data.forEach((file)=>{
-
-const fileUrl = `${SUPABASE_URL}/storage/v1/object/public/school-files/${file.name}`;
-
-const item = document.createElement('div');
-
-item.className = 'bg-white rounded-2xl p-4 border border-slate-200';
-
-item.innerHTML = `
-<div class="flex justify-between items-center gap-3">
-<p class="font-bold text-blue-700 flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
-${file.name}
-</p>
-<div class="flex gap-2">
-<button class="open-file bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold">فتح</button>
-<button class="download-btn bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-bold">تحميل</button>
-</div>
-</div>
-`;
-
-item.querySelector('.open-file').addEventListener('click',()=>{
-window.open(fileUrl,'_blank');
-});
-
-item.querySelector('.download-btn').addEventListener('click',()=>{
-
-currentDownloadLink = {
-url:fileUrl,
-name:file.name
-};
-
-document.getElementById('download-login-modal').classList.remove('hidden');
-
-});
-
-filesList.appendChild(item);
-
-});
-
-});
-}
-
 loadSavedLogo();
 
 </script>
