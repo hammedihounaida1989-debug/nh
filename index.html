@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -18,18 +18,8 @@ box-sizing:border-box;
 }
 
 body{
+background:linear-gradient(135deg,#f0fdf4,#eff6ff,#ffffff);
 min-height:100vh;
-background:
-radial-gradient(circle at top right, rgba(59,130,246,0.18), transparent 25%),
-radial-gradient(circle at bottom left, rgba(234,179,8,0.18), transparent 30%),
-linear-gradient(135deg,#f0fdf4 0%,#eff6ff 40%,#ffffff 100%);
-background-attachment:fixed;
-overflow-x:hidden;
-}
-
-.glass{
-background:rgba(255,255,255,0.75);
-backdrop-filter:blur(18px);
 }
 
 .card-hover{
@@ -40,543 +30,250 @@ transition:0.3s;
 transform:translateY(-5px);
 box-shadow:0 15px 30px rgba(0,0,0,0.08);
 }
-
-.active-level{
-background:#bbf7d0;
-color:#166534;
-border:2px solid #86efac;
-}
-
-.sidebar-link:hover{
-background:#fff7d6;
-color:#b7791f;
-}
-
-.modal-bg{
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(5px);
-}
 </style>
 </head>
-
 <body>
 
-<div id="login-page" class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-yellow-50 z-50 p-4">
+<div class="min-h-screen grid lg:grid-cols-[300px_1fr]">
 
-<div class="bg-white w-full max-w-md rounded-[35px] p-8 shadow-2xl">
-
-<h1 class="text-4xl font-black text-center text-blue-900 mb-3">
-تسجيل دخول المدير
-</h1>
-
-<p class="text-center text-slate-500 mb-8">
-التعليم هو مفتاح المستقبل
-</p>
-
-<input id="admin-username" type="text" placeholder="اسم المستخدم" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
-
-<input id="admin-password" type="password" placeholder="كلمة المرور" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-6">
-
-<button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black">
-دخول المدير
-</button>
-
-<p id="login-error" class="hidden text-red-500 text-center mt-4 font-bold">
-معلومات الدخول غير صحيحة
-</p>
-
-<div class="mt-8 border-t pt-6">
-
-<h2 class="text-2xl font-black text-green-700 text-center mb-4">
-دخول التلاميذ
-</h2>
-
-<input id="student-name" type="text" placeholder="اسم التلميذ" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
-
-<input id="student-password" type="password" placeholder="كلمة المرور" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
-
-<button id="student-login-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-black">
-دخول التلميذ
-</button>
-
-</div>
-</div>
-</div>
-
-<div id="download-login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-bg p-4">
-
-<div class="bg-white w-full max-w-md rounded-[35px] p-8 shadow-2xl">
-
-<h2 class="text-3xl font-black text-center text-blue-900 mb-4">
-تأكيد التحميل
-</h2>
-
-<input id="download-student-name" type="text" placeholder="اسم التلميذ" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
-
-<input id="download-student-password" type="password" placeholder="كلمة المرور" class="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 mb-4">
-
-<button id="download-login-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-black">
-تحميل الملف
-</button>
-
-</div>
-</div>
-
-<div id="platform" class="hidden min-h-screen glass">
-<div class="grid lg:grid-cols-[320px_1fr] min-h-screen">
-
-<aside class="bg-yellow-50 border-l border-yellow-100 p-6">
+<aside class="bg-yellow-50 border-l p-6">
 
 <div class="text-center mb-10">
 
-<div id="sidebar-logo" class="w-32 h-32 mx-auto rounded-[30px] bg-white flex items-center justify-center shadow-xl overflow-hidden text-7xl">
+<div id="sidebar-logo" class="w-32 h-32 mx-auto bg-white rounded-[30px] shadow-xl overflow-hidden flex items-center justify-center text-6xl">
 ⭐
 </div>
 
-<label class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl cursor-pointer font-bold text-sm">
+<label class="mt-5 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl cursor-pointer font-bold">
 تغيير الشعار
 <input type="file" id="logo-input" accept="image/*" class="hidden">
 </label>
 
-<h1 class="text-3xl font-extrabold text-blue-900 mt-5">
+<h1 class="text-3xl font-black text-blue-900 mt-6">
 نجم الدين همادي
 </h1>
 
-<p class="text-slate-500 mt-2">
+<p class="text-yellow-600 font-bold mt-2">
 التعليم هو مفتاح المستقبل
 </p>
+
 </div>
 
-<nav class="space-y-3">
+<div class="space-y-3">
+<button onclick="showHome()" class="w-full bg-blue-100 text-blue-700 py-4 rounded-2xl font-bold">
+الرئيسية
+</button>
 
-<a href="#" id="home-btn" class="sidebar-link flex items-center justify-between bg-blue-50 text-blue-700 px-5 py-4 rounded-2xl font-bold">
-<span>الرئيسية</span>
-<span>🏠</span>
-</a>
+<button onclick="showSubjects()" class="w-full bg-green-100 text-green-700 py-4 rounded-2xl font-bold">
+المواد
+</button>
+</div>
 
-<a href="#" id="toggle-subjects" class="sidebar-link flex items-center justify-between px-5 py-4 rounded-2xl font-bold">
-<span>المواد</span>
-<span>📚</span>
-</a>
-
-</nav>
 </aside>
 
 <main class="p-6 md:p-10">
 
-<div id="home-page" class="flex flex-col items-center justify-center text-center py-10">
+<div id="home-page" class="text-center py-10">
 
-<div id="main-logo" class="w-[350px] md:w-[500px] bg-white rounded-[40px] shadow-2xl border-8 border-blue-100 overflow-hidden p-10 flex items-center justify-center mb-8">
-<div class="text-[180px]">⭐</div>
+<div id="main-logo" class="w-[350px] h-[350px] mx-auto bg-white rounded-[40px] shadow-2xl border-8 border-blue-100 overflow-hidden flex items-center justify-center text-[180px]">
+⭐
 </div>
 
-<h1 class="text-5xl font-black text-blue-900 mb-4">
+<h1 class="text-5xl font-black text-blue-900 mt-8">
 نجم الدين همادي
 </h1>
 
-<p class="text-2xl text-yellow-500 font-black">
+<p class="text-2xl text-yellow-600 font-black mt-3">
 التعليم هو مفتاح المستقبل
 </p>
+
 </div>
 
 <div id="subjects-page" class="hidden">
 
-<div id="level-page" class="hidden bg-white rounded-[35px] p-8 shadow-xl border border-green-100 mb-10">
+<h2 class="text-5xl font-black text-green-700 text-center mb-10">
+السنة الخامسة
+</h2>
 
-<button id="back-to-levels" class="mb-6 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-5 py-3 rounded-2xl font-bold">
-← العودة
-</button>
+<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
 
-<h2 id="level-title" class="text-5xl font-black text-green-700 mb-8 text-center"></h2>
+<div class="card-hover bg-white rounded-[30px] p-7 border shadow-sm">
+<h3 class="text-3xl font-black text-blue-900 mb-5">الرياضيات</h3>
 
-<div id="level-subjects-container" class="grid md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
+<div class="space-y-4">
+
+<div class="bg-blue-50 rounded-2xl p-4">
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-black text-blue-700">📘 الدروس</h4>
+<button class="upload-btn bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold">رفع</button>
+</div>
+<div class="files-list"></div>
 </div>
 
-<div id="levels-list" class="flex gap-3 overflow-x-auto pb-3 mb-8">
+<div class="bg-yellow-50 rounded-2xl p-4">
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-black text-yellow-700">📝 التمارين</h4>
+<button class="upload-btn bg-yellow-600 text-white px-4 py-2 rounded-xl text-sm font-bold">رفع</button>
+</div>
+<div class="files-list"></div>
+</div>
 
-<button class="level-btn active-level px-7 py-3 rounded-full font-bold border-2 border-green-200">السنة الأولى</button>
-<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">السنة الثانية</button>
-<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">السنة الثالثة</button>
-<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">السنة الرابعة</button>
-<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">السنة الخامسة</button>
-<button class="level-btn bg-green-50 border border-green-200 px-7 py-3 rounded-full font-bold text-green-700">السنة السادسة</button>
+<div class="bg-red-50 rounded-2xl p-4">
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-black text-red-700">📄 الاختبارات</h4>
+<button class="upload-btn bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-bold">رفع</button>
+</div>
+<div class="files-list"></div>
+</div>
 
 </div>
 </div>
+
+</div>
+</div>
+
 </main>
-</div>
 </div>
 
 <script>
-
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "123456";
-
-let currentDownloadLink = null;
-let isStudent = false;
-
-const students = [
-{name:"ahmed",password:"123"},
-{name:"sara",password:"456"},
-{name:"mohamed",password:"789"}
-];
-
-const homePage = document.getElementById('home-page');
-const subjectsPage = document.getElementById('subjects-page');
-const logoInput = document.getElementById('logo-input');
-const sidebarLogo = document.getElementById('sidebar-logo');
-const mainLogo = document.getElementById('main-logo');
-
-const subjectsByLevel = {
-'السنة الأولى':['الرياضيات','اللغة العربية','الإيقاظ العلمي'],
-'السنة الثانية':['الرياضيات','اللغة العربية','الإيقاظ العلمي'],
-'السنة الثالثة':['الرياضيات','اللغة العربية','الفرنسية'],
-'السنة الرابعة':['الرياضيات','اللغة العربية','الفرنسية'],
-'السنة الخامسة':['الرياضيات','اللغة العربية','الفرنسية'],
-'السنة السادسة':['الرياضيات','اللغة العربية','الفرنسية']
-};
-
-function createFolder(title,color){
-return `
-<div class="folder-box bg-${color}-50 rounded-2xl p-4">
-<div class="flex justify-between items-center mb-3">
-<h4 class="font-black text-${color}-700">${title}</h4>
-<button class="upload-btn bg-${color}-600 text-white px-4 py-2 rounded-xl text-sm font-bold">رفع</button>
-</div>
-<div class="files-list space-y-2"></div>
-</div>
-`;
+function showHome(){
+document.getElementById('home-page').classList.remove('hidden');
+document.getElementById('subjects-page').classList.add('hidden');
 }
 
-function createSubjectCard(subjectName){
-return `
-<div class="card-hover bg-white rounded-[30px] p-7 border border-slate-100 shadow-sm">
-<h3 class="text-3xl font-black text-blue-900 mb-5">${subjectName}</h3>
-<div class="grid gap-4">
-${createFolder('📘 الدروس','blue')}
-${createFolder('📝 التمارين','yellow')}
-${createFolder('📄 الاختبارات','red')}
-</div>
-</div>
-`;
+function showSubjects(){
+document.getElementById('home-page').classList.add('hidden');
+document.getElementById('subjects-page').classList.remove('hidden');
 }
-
-document.getElementById('login-btn').addEventListener('click',()=>{
-
-const username = document.getElementById('admin-username').value;
-const password = document.getElementById('admin-password').value;
-
-if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
-
-document.getElementById('login-page').classList.add('hidden');
-document.getElementById('platform').classList.remove('hidden');
-
-}else{
-document.getElementById('login-error').classList.remove('hidden');
-}
-});
-
-document.getElementById('student-login-btn').addEventListener('click',()=>{
-
-const studentName = document.getElementById('student-name').value.trim();
-const studentPassword = document.getElementById('student-password').value.trim();
-
-const foundStudent = students.find(student =>
-student.name === studentName && student.password === studentPassword
-);
-
-if(foundStudent){
-isStudent = true;
-document.getElementById('login-page').classList.add('hidden');
-document.getElementById('platform').classList.remove('hidden');
-}
-});
-
-document.getElementById('home-btn').addEventListener('click',(e)=>{
-e.preventDefault();
-homePage.classList.remove('hidden');
-subjectsPage.classList.add('hidden');
-});
-
-document.getElementById('toggle-subjects').addEventListener('click',(e)=>{
-e.preventDefault();
-homePage.classList.add('hidden');
-subjectsPage.classList.remove('hidden');
-});
-
-const levelPage = document.getElementById('level-page');
-const levelsList = document.getElementById('levels-list');
-const levelTitle = document.getElementById('level-title');
-const levelSubjectsContainer = document.getElementById('level-subjects-container');
-
-function renderSubjects(levelName){
-
-levelPage.classList.remove('hidden');
-levelsList.classList.add('hidden');
-
-levelTitle.textContent = levelName;
-levelSubjectsContainer.innerHTML='';
-
-subjectsByLevel[levelName].forEach(subject=>{
-levelSubjectsContainer.innerHTML += createSubjectCard(subject);
-});
-
-attachUploadEvents();
-renderSavedFiles();
-}
-
-document.querySelectorAll('.level-btn').forEach((btn)=>{
-btn.addEventListener('click',()=>{
-renderSubjects(btn.textContent.trim());
-});
-});
-
-document.getElementById('back-to-levels').addEventListener('click',()=>{
-levelPage.classList.add('hidden');
-levelsList.classList.remove('hidden');
-});
-
 </script>
 
-```html
 <script type="module">
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-const SUPABASE_URL = 'https://orrmwdjebfawekocbjrx.supabase.co'
-const SUPABASE_KEY = 'sb_publishable_foc4DXyMgwjQ1JMM3kzrQA_ybbbia7X'
+const SUPABASE_URL = 'https://orrmwdjebfawekocbjrx.supabase.co';
 
-const supabase = createClient(SUPABASE_URL,SUPABASE_KEY)
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ycm13ZGplYmZhd2Vrb3FianJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyODYzMzAsImV4cCI6MjA5NDg2MjMzMH0.lfDwqOc0Zs6bP_bAKAI3QZs9QU5M1g3dZ4E8ljJemHI';
 
-window.supabase = supabase;
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* رفع الملفات */
+const sidebarLogo = document.getElementById('sidebar-logo');
+const mainLogo = document.getElementById('main-logo');
+const logoInput = document.getElementById('logo-input');
 
-async function uploadFileToSupabase(file,levelName,subjectName,folderName){
+/* رفع الشعار */
 
-try{
+async function uploadLogo(file){
 
-const safeLevel =
-levelName.replaceAll('/','-');
+const fileExt = file.name.split('.').pop();
+const filePath = `logos/logo-${Date.now()}.${fileExt}`;
 
-const safeSubject =
-subjectName.replaceAll('/','-');
-
-const safeFolder =
-folderName.replaceAll('/','-');
-
-const filePath =
-`${safeLevel}/${safeSubject}/${safeFolder}/${Date.now()}-${file.name}`;
-
-const { data,error } =
-await supabase.storage
+const { error } = await supabase.storage
 .from('school-files')
-.upload(filePath,file,{
+.upload(filePath, file, {
 cacheControl:'3600',
-upsert:true
-});
-
-console.log(data);
-console.log(error);
-
-if(error){
-
-alert(error.message);
-
-return null;
-}
-
-const { data:publicData } =
-supabase.storage
-.from('school-files')
-.getPublicUrl(filePath);
-
-return{
-url:publicData.publicUrl,
-name:file.name
-};
-
-}catch(err){
-
-console.log(err);
-
-alert('حدث خطأ أثناء رفع الملف');
-
-return null;
-}
-
-}}
-
-/* تحميل الملفات */
-
-window.renderSavedFiles = async function(){
-
-document.querySelectorAll('.folder-box').forEach(async(folder)=>{
-
-const filesList = folder.querySelector('.files-list');
-
-filesList.innerHTML = '';
-
-let folderName =
-folder.querySelector('h4').textContent.trim();
-
-if(folderName.includes('الدروس')){
-folderName = 'lessons';
-}
-
-if(folderName.includes('التمارين')){
-folderName = 'exercises';
-}
-
-if(folderName.includes('الاختبارات')){
-folderName = 'tests';
-}
-
-const subjectName =
-folder.closest('.card-hover')
-.querySelector('h3')
-.textContent.trim();
-
-const levelName =
-document.getElementById('level-title')
-.textContent.trim();
-
-const folderPath =
-`${levelName}/${subjectName}/${folderName}`;
-
-const { data,error } =
-await supabase.storage
-.from('school-files')
-.list(folderPath,{
-limit:100
+upsert:true,
+contentType:file.type
 });
 
 if(error){
-
 console.log(error);
-
+alert('فشل رفع الشعار : ' + error.message);
 return;
 }
 
-data.forEach((file)=>{
+const { data } = supabase.storage
+.from('school-files')
+.getPublicUrl(filePath);
 
-const fileUrl =
-`${SUPABASE_URL}/storage/v1/object/public/school-files/${folderPath}/${file.name}`;
-
-const item =
-document.createElement('div');
-
-item.className =
-'bg-white rounded-2xl p-4 border border-slate-200';
-
-item.innerHTML = `
-
-<div class="flex justify-between items-center gap-3">
-
-<p class="font-bold text-blue-700 flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
-${file.name}
-</p>
-
-<div class="flex gap-2">
-
-<button class="open-file bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
-فتح
-</button>
-
-<button class="download-btn bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-bold">
-تحميل
-</button>
-
-</div>
-
-</div>
-
+sidebarLogo.innerHTML = `
+<img src="${data.publicUrl}" class="w-full h-full object-cover">
 `;
 
-item.querySelector('.open-file')
-.addEventListener('click',()=>{
+mainLogo.innerHTML = `
+<img src="${data.publicUrl}" class="w-full h-full object-cover">
+`;
 
-window.open(fileUrl,'_blank');
+localStorage.setItem('platformLogo', data.publicUrl);
 
-});
-
-item.querySelector('.download-btn')
-.addEventListener('click',()=>{
-
-const link =
-document.createElement('a');
-
-link.href = fileUrl;
-
-link.download = file.name;
-
-document.body.appendChild(link);
-
-link.click();
-
-document.body.removeChild(link);
-
-});
-
-filesList.appendChild(item);
-
-});
-
-});
-
+alert('تم رفع الشعار بنجاح');
 }
 
-/* أزرار الرفع */
+function loadLogo(){
 
-window.attachUploadEvents = function(){
+const savedLogo = localStorage.getItem('platformLogo');
 
-document.querySelectorAll('.upload-btn')
-.forEach((button)=>{
+if(savedLogo){
+sidebarLogo.innerHTML = `
+<img src="${savedLogo}" class="w-full h-full object-cover">
+`;
 
-button.onclick = null;
+mainLogo.innerHTML = `
+<img src="${savedLogo}" class="w-full h-full object-cover">
+`;
+}
+}
 
-button.addEventListener('click',()=>{
+logoInput.addEventListener('change', async (e)=>{
 
-const input =
-document.createElement('input');
-
-input.type='file';
-
-input.accept =
-'.pdf,.doc,.docx,.png,.jpg,.jpeg,.mp4';
-
-input.addEventListener('change', async(e)=>{
+try{
 
 const file = e.target.files[0];
 
 if(!file) return;
 
-const folder =
-button.closest('.folder-box');
+await uploadLogo(file);
 
-const folderName =
-folder.querySelector('h4').textContent.trim();
+}catch(err){
+alert(err.message);
+}
 
-const subjectName =
-button.closest('.card-hover')
-.querySelector('h3')
-.textContent.trim();
+});
 
-const levelName =
-document.getElementById('level-title')
-.textContent.trim();
+/* رفع الملفات */
 
-const uploaded =
-await uploadFileToSupabase(
-file,
-levelName,
-subjectName,
-folderName
-);
+window.attachUploadEvents = function(){
 
-if(!uploaded) return;
+const buttons = document.querySelectorAll('.upload-btn');
 
-renderSavedFiles();
+buttons.forEach((button)=>{
+
+button.addEventListener('click',()=>{
+
+const input = document.createElement('input');
+input.type = 'file';
+
+input.addEventListener('change', async(e)=>{
+
+try{
+
+const file = e.target.files[0];
+if(!file) return;
+
+const filePath = `files/${Date.now()}-${file.name}`;
+
+const { error } = await supabase.storage
+.from('school-files')
+.upload(filePath, file, {
+upsert:true,
+contentType:file.type
+});
+
+if(error){
+console.log(error);
+alert(error.message);
+return;
+}
+
+alert('تم رفع الملف بنجاح');
+
+input.value='';
+
+renderFiles();
+
+}catch(err){
+alert(err.message);
+}
 
 });
 
@@ -585,13 +282,59 @@ input.click();
 });
 
 });
+}
+
+/* عرض الملفات */
+
+async function renderFiles(){
+
+const lists = document.querySelectorAll('.files-list');
+lists.forEach(list => list.innerHTML='');
+
+const { data, error } = await supabase.storage
+.from('school-files')
+.list('files', { limit:100 });
+
+if(error){
+console.log(error);
+return;
+}
+
+lists.forEach((list)=>{
+
+data.forEach((file)=>{
+
+const fileUrl = `${SUPABASE_URL}/storage/v1/object/public/school-files/files/${file.name}`;
+
+const item = document.createElement('div');
+
+item.className = 'bg-white rounded-xl border p-3 mt-2 flex justify-between items-center';
+
+item.innerHTML = `
+<p class="font-bold text-blue-700 overflow-hidden text-ellipsis whitespace-nowrap">
+${file.name}
+</p>
+
+<button class="open-btn bg-green-600 text-white px-3 py-2 rounded-xl text-sm font-bold">
+فتح
+</button>
+`;
+
+item.querySelector('.open-btn').addEventListener('click',()=>{
+window.open(fileUrl,'_blank');
+});
+
+list.appendChild(item);
+
+});
+
+});
 
 }
 
-</script>
-```
-
-loadSavedLogo();
+loadLogo();
+attachUploadEvents();
+renderFiles();
 
 </script>
 
