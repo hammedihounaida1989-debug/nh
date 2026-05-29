@@ -359,8 +359,10 @@ const filePath =
 
 const { error } = await supabase.storage
 .from('school-files')
-.upload(filePath,file);
-
+.upload(filePath,file,{
+upsert:true
+});
+console.log(error);
 if(error){
 
 console.log(error);
